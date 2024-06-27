@@ -26,27 +26,27 @@
     }
 </style>
 
-<div class="p-4 text-xs">
+<div class="p-4 text-xs text-center">
     <div class="grid grid-cols-2 gap-4">
         <div class="purple-team p-4 rounded">
             <h2 class="text-center font-bold mb-4">퍼플팀</h2>
             {#each winners as player}
-                <div class="flex justify-between p-2 border-b">
-                    <div>{player.nickname}</div>
-                    <div>{player.name}</div>
-                    <div>{player.champion}</div>
-                    <div>{player.kda}</div>
+                <div class="grid grid-cols-4 gap-2 p-2 border-b">
+                    <div class="text-center">{player.nickname}</div>
+                    <div class="text-center">{player.name}</div>
+                    <div class="text-center">{player.champion}</div>
+                    <div class="text-center">{player.kda}</div>
                 </div>
             {/each}
         </div>
         <div class="red-team p-4 rounded">
             <h2 class="text-center font-bold mb-4">레드팀</h2>
             {#each losers as player}
-                <div class="flex justify-between p-2 border-b">
-                    <div>{player.nickname}</div>
-                    <div>{player.name}</div>
-                    <div>{player.champion}</div>
-                    <div>{player.kda}</div>
+                <div class="grid grid-cols-4 gap-2 p-2 border-b">
+                    <div class="text-center">{player.nickname}</div>
+                    <div class="text-center">{player.name}</div>
+                    <div class="text-center">{player.champion}</div>
+                    <div class="text-center">{player.kda}</div>
                 </div>
             {/each}
         </div>

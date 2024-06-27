@@ -46,7 +46,7 @@
     }
 </script>
 
-<div class="overflow-x-auto overflow-y-auto max-h-96" role="table">
+<div class="overflow-x-auto overflow-y-auto max-h-96 text-center" role="table">
     <div class="grid grid-cols-6 gap-4 bg-gray-50 p-4 font-medium text-gray-500 uppercase cursor-pointer" role="row">
         <div on:click={() => sortTable('playedGames')} role="columnheader">Played Game</div>
         <div on:click={() => sortTable('nickname')} role="columnheader">Nickname</div>
@@ -56,9 +56,9 @@
         <div on:click={() => sortTable('kda')} role="columnheader">KDA</div>
     </div>
     {#each $rows as row (row.id)}
-        <div class="grid grid-cols-6 gap-4 p-4 border-b" role="row" animate:flip>
+        <div class="grid grid-cols-6 gap-4 p-4 border-b" role="row" animate:flip={{ duration: 200 }}>
             <div class="text-sm text-gray-500" role="cell">{row.playedGames}</div>
-            <div class="text-sm text-blue-500" role="cell"><a href="https://www.op.gg/summoners/kr/{row.nickname}" target="_blank">{row.nickname}</div>
+            <div class="text-sm text-blue-500" role="cell"><a href="https://www.op.gg/summoners/kr/{row.nickname}" target="_blank" />{row.nickname}</div>
             <div class="text-sm text-gray-500" role="cell">{row.summonerName}</div>
             <div class="text-sm text-gray-500" role="cell">{row.mostChampion}</div>
             <div class="text-sm text-gray-500" role="cell">{row.winningPercentage}</div>
