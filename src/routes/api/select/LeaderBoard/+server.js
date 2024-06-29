@@ -24,7 +24,7 @@ export async function GET() {
                  , ROUND((SUM(g.kills) + SUM(g.assists)) / GREATEST(SUM(g.deaths), 1), 2)       AS kda
             FROM game_data g
             GROUP BY g.summoner_name, g.nickname
-            ORDER BY winningPercentage DESC, playedGames DESC
+            ORDER BY winningPercentage DESC, playedGames DESC, kda desc
         `;
 
         const jsonData = JSON.stringify(data, replacer);

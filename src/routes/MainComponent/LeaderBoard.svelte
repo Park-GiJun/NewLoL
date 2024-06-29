@@ -1,7 +1,7 @@
 <script>
-    import {flip} from 'svelte/animate';
+    import { flip } from 'svelte/animate';
 
-    export let rows = []; // rows prop을 배열로 정의합니다.
+    export let rows = [];
 
     let currentSort = 'playedGames';
     let isAscending = true;
@@ -18,7 +18,7 @@
             let valueA = a[sortKey];
             let valueB = b[sortKey];
 
-            if (sortKey === 'winningPercentage') {
+            if (sortKey === 'winningPercentage' || sortKey === 'kda') {
                 valueA = parseFloat(valueA);
                 valueB = parseFloat(valueB);
             }
@@ -46,15 +46,15 @@
         <div on:click={() => sortTable('winningPercentage')} on:keypress role="columnheader" tabindex="0">승률</div>
         <div on:click={() => sortTable('kda')} on:keypress role="columnheader" tabindex="0">KDA</div>
     </div>
-    {#each rows as row (row.id)}
+    {#each rows as row (row.summonerName)}
         <div class="grid grid-cols-5 gap-4 p-4 border-b border-gray-600 dark:border-gray-700 bg-gray-800 dark:bg-gray-800 text-white"
-             role="row" animate:flip={{ duration: 200 }}>
+             role="row" animate:flip={{ duration: 200 }} key={row.summonerName}>
             <div class="text-sm" role="cell">{row.playedGames}</div>
             <div class="text-sm text-blue-400" role="cell">
                 <a href="https://www.op.gg/summoners/kr/{row.nickname}" target="_blank">{row.nickname}</a>
             </div>
             <div class="text-sm" role="cell">{row.mostChampion}</div>
-            <div class="text-sm" role="cell">{row.winningPercentage}</div>
+            <div class="text-sm" role="cell">{row.winningPercentage}%</div>
             <div class="text-sm" role="cell">{row.kda}</div>
         </div>
     {/each}

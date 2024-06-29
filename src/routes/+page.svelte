@@ -2,8 +2,8 @@
     import Card from './MainComponent/Card.svelte';
     import MatchInfo from "./MainComponent/MatchInfo.svelte";
     import LeaderBoard from "./MainComponent/LeaderBoard.svelte";
-    import { onMount } from "svelte";
-    import {get, writable} from 'svelte/store';
+    import {onMount} from "svelte";
+    import {writable, get} from 'svelte/store';
 
     let cards = [];
     let recentMatch = [];
@@ -25,12 +25,12 @@
             console.log(get(leaderBoardData));
 
             cards = [
-                { header: 'Game', value: cardsData[0]["totalGamesPlayed"] },
-                { header: 'Days', value: cardsData[0]["totalDaysPlayed"] },
-                { header: 'Most Champion', value: cardsData[0]["mostPlayedChampion"] },
-                { header: 'Most Kill', value: cardsData[0]["mostKillsChampion"] },
-                { header: 'Most Death', value: cardsData[0]["mostDeathsChampion"] },
-                { header: 'Best KDA', value: cardsData[0]["bestKDAChampion"] }
+                {header: 'Game', value: cardsData[0]["totalGamesPlayed"]},
+                {header: 'Days', value: cardsData[0]["totalDaysPlayed"]},
+                {header: 'Most Champion', value: cardsData[0]["mostPlayedChampion"]},
+                {header: 'Most Kill', value: cardsData[0]["mostKillsChampion"]},
+                {header: 'Most Death', value: cardsData[0]["mostDeathsChampion"]},
+                {header: 'Best KDA', value: cardsData[0]["bestKDAChampion"]}
             ];
 
             isLoading = false;
@@ -55,7 +55,7 @@
             <MatchInfo {recentMatch}/>
         </div>
         <div class="col-span-1 sm:col-span-2 lg:col-span-3">
-            <LeaderBoard {leaderBoardData}/>
+            <LeaderBoard rows={$leaderBoardData}/>
         </div>
     {/if}
 </div>
