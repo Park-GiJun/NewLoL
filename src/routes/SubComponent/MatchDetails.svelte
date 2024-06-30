@@ -1,7 +1,5 @@
 <script>
-    import { get, writable } from 'svelte/store';
-
-    export let recentMatch = writable([]);
+    export let match;
 
     const positionOrder = ['Top', 'Jungle', 'Mid', 'ADC', 'Support'];
 
@@ -11,9 +9,8 @@
     let redTeam = [];
 
     $: {
-        const recentData = get(recentMatch);
-        winners = recentData.filter(player => player.winning === 1);
-        losers = recentData.filter(player => player.winning === 0);
+        winners = match.filter(player => player.winning === 1);
+        losers = match.filter(player => player.winning === 0);
 
         blueTeam = winners.filter(player => player.team_color.toLowerCase() === 'blue');
         redTeam = losers.filter(player => player.team_color.toLowerCase() === 'red');
@@ -32,7 +29,7 @@
     }
 </script>
 
-<div class="p-4 text-xs text-center dark:bg-gray-900">
+<div class="p-4 text-xs text-center dark:bg-gray-900 overflow-y-auto">
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div class={`p-4 rounded-lg shadow-md ${blueTeam[0]?.winning ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' : 'bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-200'}`}>
             <h2 class="text-center font-bold mb-2">블루팀</h2>

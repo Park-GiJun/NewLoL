@@ -11,6 +11,7 @@
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^3.0.0",
+		"@sveltejs/adapter-node": "^5.2.0",
 		"@sveltejs/kit": "^2.5.17",
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
 		"@types/eslint": "^8.56.7",
@@ -30,9 +31,10 @@
 	"type": "module",
 	"dependencies": {
 		"@prisma/client": "^5.16.1",
-		"@sveltejs/adapter-node": "^5.2.0",
 		"dotenv": "^16.4.5",
 		"lodash": "^4.17.21",
+		"luxon": "^3.4.4",
+		"request-ip": "^3.3.0",
 		"svelte-preprocess": "^6.0.1",
 		"uuid": "^10.0.0"
 	}

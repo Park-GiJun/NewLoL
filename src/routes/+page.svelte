@@ -6,8 +6,9 @@
     import {writable, get} from 'svelte/store';
 
     let cards = [];
-    let recentMatch = [];
+    let recentMatch = writable([]);
     let leaderBoardData = writable([]);
+    let ipAddress = writable('');
     let isLoading = true;
 
     onMount(async () => {
@@ -19,11 +20,8 @@
             ]);
 
             const cardsData = await cardsRes.json();
-            recentMatch = await matchRes.json();
+            recentMatch.set(await matchRes.json());
             leaderBoardData.set(await leaderBoardRes.json());
-
-            console.log(get(leaderBoardData));
-
             cards = [
                 {header: 'Game', value: cardsData[0]["totalGamesPlayed"]},
                 {header: 'Days', value: cardsData[0]["totalDaysPlayed"]},

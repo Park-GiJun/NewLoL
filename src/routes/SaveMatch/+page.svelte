@@ -28,7 +28,8 @@
                         assists: '',
                         suggestions: [],
                         championSuggestions: [],
-                        banSuggestions: []
+                        banSuggestions: [],
+                        winning: 0
                     });
                     red.push({
                         nickname: team2Names[j],
@@ -39,7 +40,8 @@
                         assists: '',
                         suggestions: [],
                         championSuggestions: [],
-                        banSuggestions: []
+                        banSuggestions: [],
+                        winning: 0
                     });
                 } else {
                     blue.push({
@@ -51,7 +53,8 @@
                         assists: '',
                         suggestions: [],
                         championSuggestions: [],
-                        banSuggestions: []
+                        banSuggestions: [],
+                        winning: 0
                     });
                     red.push({
                         nickname: team1Names[j],
@@ -62,7 +65,8 @@
                         assists: '',
                         suggestions: [],
                         championSuggestions: [],
-                        banSuggestions: []
+                        banSuggestions: [],
+                        winning: 0
                     });
                 }
             }
@@ -90,8 +94,44 @@
         const game = get(games)[gameIndex];
         console.log('Saving game:', game);
 
-        const matchCode = MatchCodeGenerator.generateMatchCodeWithUUID();
-        console.log(matchCode);
+        let matchCode;
+        let existMatchCode;
+
+        do {
+            matchCode = MatchCodeGenerator.generateMatchCodeWithUUID();
+            console.log('Generated match code:', matchCode);
+            existMatchCode = await fetch(`../SaveMatch/api/select/MatchCode?query=${matchCode}`)
+                .then(res => res.json())
+                .then(data => data.exists);
+        } while (existMatchCode);
+
+        console.log('Unique match code:', matchCode);
+
+        // Add winning status to each player
+        const blueTeam = game.blueTeam.map(player => ({
+            ...player,
+            winning: game.winningTeam === 'blue' ? 1 : 0
+        }));
+        const redTeam = game.redTeam.map(player => ({
+            ...player,
+            winning: game.winningTeam === 'red' ? 1 : 0
+        }));
+
+        const saveGameResponse = await fetch('../SaveMatch/api/insert/SaveMatch', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                matchCode: matchCode,
+                blueTeam: blueTeam,
+                redTeam: redTeam,
+                winning: game.winningTeam
+            })
+        });
+
+        const saveGameResult = await saveGameResponse.json();
+        console.log('Save game response:', saveGameResult);
     }
 
     async function fetchSuggestions(type, team, index, gameIndex, isBan = false) {

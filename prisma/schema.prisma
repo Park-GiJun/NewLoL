@@ -53,6 +53,12 @@ model name_nickname {
 }
 
 model champion {
-  id      Int    @id @default(autoincrement())
-  name_ko String @db.VarChar(255)
+  id       Int    @id @default(autoincrement())
+  champion String @db.VarChar(255)
+}
+
+model ip {
+  id   Int       @id
+  ip   String?   @db.VarChar(255)
+  date DateTime? @db.DateTime(0)
 }

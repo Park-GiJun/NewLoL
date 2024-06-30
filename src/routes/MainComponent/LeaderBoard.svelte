@@ -47,9 +47,9 @@
         <div on:click={() => sortTable('winningPercentage')} on:keypress role="columnheader" tabindex="0">승률</div>
         <div on:click={() => sortTable('kda')} on:keypress role="columnheader" tabindex="0">KDA</div>
     </div>
-    {#each rows as row (row["summonerName"])}
+    {#each rows as row (row["nickname"])}
         <div class="grid grid-cols-6 gap-4 p-2 border-b border-gray-600 dark:border-gray-700 bg-gray-800 dark:bg-gray-800 text-white sm:text-xxs"
-             role="row" animate:flip={{ duration: 200 }} key={row["summonerName"]}>
+             role="row" animate:flip={{ duration: 200 }} key={row["nickname"]}>
             <div class="text-xxs sm:text-xxs" role="cell">{row["playedGames"]}</div>
             <div class="text-xxs sm:text-xxs text-blue-400" role="cell">
                 <a href="https://www.op.gg/summoners/kr/{row.nickname}" target="_blank">{row.nickname}</a>

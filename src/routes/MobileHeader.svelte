@@ -34,13 +34,16 @@
                     <a href="/" class="block py-2 px-4 hover:bg-gray-700 dark:hover:bg-gray-800 rounded transition duration-200 ease-in-out">홈</a>
                 </li>
                 <li>
-                    <a href="/about" class="block py-2 px-4 hover:bg-gray-700 dark:hover:bg-gray-800 rounded transition duration-200 ease-in-out">전적 검색</a>
+                    <a href="/PlayerSearch" class="block py-2 px-4 hover:bg-gray-700 dark:hover:bg-gray-800 rounded transition duration-200 ease-in-out">전적 검색</a>
                 </li>
                 <li>
-                    <a href="/services" class="block py-2 px-4 hover:bg-gray-700 dark:hover:bg-gray-800 rounded transition duration-200 ease-in-out">기록실</a>
+                    <a href="/Archive" class="block py-2 px-4 hover:bg-gray-700 dark:hover:bg-gray-800 rounded transition duration-200 ease-in-out">기록실</a>
                 </li>
                 <li>
-                    <a href="/contact" class="block py-2 px-4 hover:bg-gray-700 dark:hover:bg-gray-800 rounded transition duration-200 ease-in-out">게임 저장</a>
+                    <a href="/Matches" class="block py-2 px-4 hover:bg-gray-700 dark:hover:bg-gray-800 rounded transition duration-200 ease-in-out">경기</a>
+                </li>
+                <li>
+                    <a href="/SaveMatch" class="block py-2 px-4 hover:bg-gray-700 dark:hover:bg-gray-800 rounded transition duration-200 ease-in-out">게임 저장</a>
                 </li>
             </ul>
         </nav>
