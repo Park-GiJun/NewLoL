@@ -22,6 +22,11 @@ export async function GET() {
                  , (SELECT COUNT(*) FROM game_data gd WHERE gd.summoner_name = g.summoner_name) AS playedGames
                  , ROUND(SUM(CASE WHEN g.winning = 1 THEN 1 ELSE 0 END) / COUNT(*) * 100, 2)    AS winningPercentage
                  , ROUND((SUM(g.kills) + SUM(g.assists)) / GREATEST(SUM(g.deaths), 1), 2)       AS kda
+            ,(SELECT position
+              from game_data gd2
+              where gd2.summoner_name = g.summoner_name
+              group by position
+              order by count(*) desc) as mostPosition
             FROM game_data g
             GROUP BY g.summoner_name, g.nickname
             ORDER BY winningPercentage DESC, playedGames DESC, kda desc

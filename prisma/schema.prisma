@@ -18,7 +18,7 @@ model game_data {
   id            BigInt    @id @default(autoincrement())
   assists       Int
   champion      String?   @db.VarChar(255)
-  date          DateTime? @db.Date
+  date          DateTime? @db.DateTime(0)
   deaths        Int
   kills         Int
   match_code    String?   @db.VarChar(255)
@@ -50,4 +50,9 @@ model name_nickname {
   id       BigInt  @id @default(autoincrement())
   name     String? @db.VarChar(255)
   nickname String? @db.VarChar(255)
+}
+
+model champion {
+  id      Int    @id @default(autoincrement())
+  name_ko String @db.VarChar(255)
 }

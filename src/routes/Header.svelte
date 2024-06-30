@@ -43,7 +43,7 @@
                 <a href="/services" class="block py-2 px-4 hover:bg-gray-700 dark:hover:bg-gray-800 rounded transition duration-200 ease-in-out">기록실</a>
             </li>
             <li>
-                <a href="/contact" class="block py-2 px-4 hover:bg-gray-700 dark:hover:bg-gray-800 rounded transition duration-200 ease-in-out">게임 저장</a>
+                <a href="/SaveMatch" class="block py-2 px-4 hover:bg-gray-700 dark:hover:bg-gray-800 rounded transition duration-200 ease-in-out">게임 저장</a>
             </li>
         </ul>
     </nav>
