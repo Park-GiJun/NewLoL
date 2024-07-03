@@ -37,7 +37,7 @@
     }
 </script>
 
-<div class="overflow-x-auto overflow-y-auto max-h-[35vh] text-center rounded-xl" role="table">
+<div class="overflow-x-auto overflow-y-auto max-h-[45vh] text-center rounded-xl" role="table">
     <div class="grid grid-cols-6 gap-4 bg-gray-700 dark:bg-gray-900 p-2 font-medium text-white uppercase cursor-pointer"
          role="row">
         <div on:click={() => sortTable('playedGames')} on:keypress role="columnheader" tabindex="0">게임수</div>

@@ -16,7 +16,7 @@ export async function GET({ url }) {
                 SELECT champion,
                        position,
                        SUM(IF(winning = 1, 1, 0)) * 100.0 / COUNT(*) AS winRate,
-                       AVG(kills + assists * 1.0 / deaths)           AS kda,
+                       AVG((kills + assists) * 1.0 / deaths)         AS kda,
                        COUNT(*)                                      AS totalGames
                 FROM game_data
                 WHERE nickname = ${nickName}
@@ -29,6 +29,8 @@ export async function GET({ url }) {
             FROM ChampionStats
             ORDER BY winRate DESC
             LIMIT 5;
+
+
         `;
 
         // Transform BigInt values to string using JSON.stringify with replacer

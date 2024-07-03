@@ -3,6 +3,7 @@
     import { selectedDate, availableDates, setDate, matchData, setMatchData } from '$lib/store/calender.js';
     import { get } from 'svelte/store';
     import MatchDetails from './MatchDetails.svelte';
+    import {findLastIndex} from "lodash";
 
     let currentYear;
     let currentMonth;
@@ -17,10 +18,9 @@
         if (dates.length > 0) {
             setDate(dates[dates.length - 1]);
         }
-
-        const today = new Date();
-        currentYear = today.getFullYear();
-        currentMonth = today.getMonth();
+        const lastDate = dates[dates.length - 1];
+        currentYear = parseInt(lastDate.split('-')[0], 10);
+        currentMonth = parseInt(lastDate.split('-')[1], 10) - 1;
     });
 
     $: fetchMatches();
@@ -77,7 +77,7 @@
     }
 
     function generateCalendar(year, month) {
-        const firstDayOfMonth = new Date(year, month, 1).getDay();
+        const firstDayOfMonth = new Date(year, month, 0).getDay();
         const daysInMonth = new Date(year, month + 1, 0).getDate();
         const calendar = [];
         let week = [];

@@ -13,23 +13,22 @@
     });
 
     function checkMobile() {
-        isMobile = window.innerWidth <= 640;
+        isMobile = window.innerWidth <= 1024;
     }
 </script>
 
-<div class="flex h-screen bg-gray-300 dark:bg-gray-900">
+<div class="flex bg-gray-300 dark:bg-gray-900">
     {#if isMobile}
-        <div class="w-full">
+        <div class="w-screen">
             <MobileHeader />
-            <div class="p-4 transition-all duration-300 ease-in-out">
+            <div class="p-4 transition-all duration-300 ease-in-out overflow-x-hidden">
                 <slot/>
             </div>
         </div>
     {:else}
         <Header />
-        <div class="flex-grow p-4 transition-all duration-300 ease-in-out">
+        <div class="flex flex-col flex-grow p-4 transition-all duration-300 ease-in-out">
             <slot/>
         </div>
     {/if}
 </div>
-

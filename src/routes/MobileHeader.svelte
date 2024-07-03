@@ -11,7 +11,7 @@
 </script>
 
 <header class="bg-gray-800 dark:bg-gray-900 text-white p-4 w-full">
-    <div class="flex justify-between items-center mb-4">
+    <div class="flex justify-between items-center {isOpen ? 'mb-4' : ''}">
         <div class="text-2xl font-bold">OLM<small class="text-xs">오롤몇</small></div>
         <button class="focus:outline-none" on:click={toggleMenu}>
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
