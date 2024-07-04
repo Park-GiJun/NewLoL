@@ -246,7 +246,7 @@
     let activeSuggestionIndex = Array(5).fill(-1);
 </script>
 
-<div class="h-screen overflow-hidden bg-gray-900 text-white text-sm">
+<div class="h-screen overflow-hidden text-white text-sm rounded-2xl gap-2">
     {#if showModal}
         <SettingModal on:submit={handleModalSubmit} on:close={handleModalClose} />
     {:else}
@@ -256,8 +256,7 @@
                     <div class="grid grid-cols-2 gap-4 mb-8">
                         <div>
                             <div class="text-xl font-bold mb-4">블루팀</div>
-                            <div class="grid grid-cols-6 gap-2 text-center font-semibold mb-2">
-                                <div>포지션</div>
+                            <div class="grid grid-cols-5 gap-2 text-center font-semibold mb-2">
                                 <div>닉네임</div>
                                 <div>챔피언</div>
                                 <div>킬</div>
@@ -265,8 +264,7 @@
                                 <div>어시스트</div>
                             </div>
                             {#each game.blueTeam as player, i}
-                                <div class="grid grid-cols-6 gap-2 text-center mb-2 p-2 bg-gray-800 rounded">
-                                    <div>{player.position}</div>
+                                <div class="grid grid-cols-5 gap-2 text-center mb-2 p-2 bg-gray-800 rounded">
                                     <div class="relative">
                                         <label for={`nickname-${gameIndex}-${i}`} class="sr-only">Nickname</label>
                                         <input id={`nickname-${gameIndex}-${i}`} type="text" inputmode="text"
@@ -326,7 +324,6 @@
                                 <label for={`winning-blue-${gameIndex}`}>블루팀 승리</label>
                             </div>
                             <div>
-                                <div class="text-xl font-bold mb-2">블루밴</div>
                                 <div class="grid grid-cols-5 gap-2">
                                     {#each game.blueBans as ban, i}
                                         <div class="relative">
@@ -356,8 +353,7 @@
                         </div>
                         <div>
                             <div class="text-xl font-bold mb-4">레드팀</div>
-                            <div class="grid grid-cols-6 gap-2 text-center font-semibold mb-2">
-                                <div>포지션</div>
+                            <div class="grid grid-cols-5 gap-2 text-center font-semibold mb-2">
                                 <div>닉네임</div>
                                 <div>챔피언</div>
                                 <div>킬</div>
@@ -365,8 +361,7 @@
                                 <div>어시스트</div>
                             </div>
                             {#each game.redTeam as player, i}
-                                <div class="grid grid-cols-6 gap-2 text-center mb-2 p-2 bg-gray-800 rounded">
-                                    <div>{player.position}</div>
+                                <div class="grid grid-cols-5 gap-2 text-center mb-2 p-2 bg-gray-800 rounded">
                                     <div class="relative">
                                         <label for={`red-nickname-${gameIndex}-${i}`} class="sr-only">Nickname</label>
                                         <input id={`red-nickname-${gameIndex}-${i}`} type="text" inputmode="text"
@@ -426,7 +421,6 @@
                                 <label for={`winning-red-${gameIndex}`}>레드팀 승리</label>
                             </div>
                             <div>
-                                <div class="text-xl font-bold mb-2">레드벤</div>
                                 <div class="grid grid-cols-5 gap-2">
                                     {#each game.redBans as ban, i}
                                         <div class="relative">

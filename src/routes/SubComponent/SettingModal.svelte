@@ -14,6 +14,18 @@
     const dispatch = createEventDispatcher();
 
     onMount(() => {
+        const now = new Date();
+
+// YYYY-MM-DD HH:MM:SS 형식으로 출력
+        const formattedDate = now.getFullYear() + '-' +
+            String(now.getMonth() + 1).padStart(2, '0') + '-' +
+            String(now.getDate()).padStart(2, '0') + ' ' +
+            String(now.getHours()).padStart(2, '0') + ':' +
+            String(now.getMinutes()).padStart(2, '0') + ':' +
+            String(now.getSeconds()).padStart(2, '0');
+
+        console.log(formattedDate);
+
         team1Suggestions = team1Names.map(() => []);
         team2Suggestions = team2Names.map(() => []);
     });

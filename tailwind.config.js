@@ -8,6 +8,7 @@ export default {
     extend: {
       fontSize: {
         'xxs':'0.625rem',
+        'xxxs':'0.25rem'
       }
     },
   },

@@ -28,10 +28,10 @@
             cards = [
                 {header: 'Game', value: cardsData[0]["totalGamesPlayed"]},
                 {header: 'Days', value: cardsData[0]["totalDaysPlayed"]},
-                {header: 'Most Champion', value: cardsData[0]["mostPlayedChampion"]},
-                {header: 'Most Kill', value: cardsData[0]["mostKillsChampion"]},
-                {header: 'Most Death', value: cardsData[0]["mostDeathsChampion"]},
-                {header: 'Best KDA', value: cardsData[0]["bestKDAChampion"]}
+                {header: 'Champion', value: cardsData[0]["mostPlayedChampion"]},
+                {header: 'Kill', value: cardsData[0]["mostKillsChampion"]},
+                {header: 'Death', value: cardsData[0]["mostDeathsChampion"]},
+                {header: 'KDA', value: cardsData[0]["bestKDAChampion"]}
             ];
 
             isLoading.set(false);
@@ -68,7 +68,7 @@
         </div>
     {/if}
 
-    <div class="my-4">
+    <div class="my-2">
         <button class="px-4 py-2 bg-gray-500 text-white rounded-lg shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 text-xs lg:hidden"
                 on:click={toggleShowMatchInfo}>
             {#if $showMatchInfo} Hide Match Info{/if}

@@ -100,8 +100,8 @@
     }
 </script>
 
-<div class="flex flex-col items-center h-[95vh] bg-gray-100 mt-[1vh]">
-    <div class="w-full bg-gray-600 p-4 flex justify-center items-center">
+<div class="flex flex-col items-center h-[89.5vh]">
+    <div class="w-full bg-gray-600 p-4 flex justify-center items-center rounded-2xl">
         <div class="flex gap-2 w-full max-w-md relative">
             <input
                     class="flex-grow p-2 border rounded-lg shadow-xs focus:outline-none focus:ring-2 focus:ring-blue-500 text-xs"
@@ -134,56 +134,56 @@
     {#if $isLoading}
         <p class="text-center mt-4 text-lg">Loading...</p>
     {:else}
-        <div class="grid grid-cols-3 md:grid-cols-3 gap-4 w-full p-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-full p-4 max-w-screen-2xl overflow-y-auto md:overflow-hidden">
             <!-- Position Win Rates -->
-            <div class="bg-white p-4 rounded-lg shadow-md text-center">
+            <div class="bg-white p-4 rounded-lg shadow-md text-center w-full">
                 <h2 class="text-center font-bold mb-4 bg-gray-300 py-2 rounded text-lg">포지션</h2>
                 <div class="grid grid-cols-3 gap-2 font-bold border-gray-300 text-xs">
-                    <div class="border-r border-gray-300">포지션</div>
-                    <div class="border-r border-gray-300">승률</div>
-                    <div class="border-r border-gray-300">게임</div>
+                    <div class="border-gray-300">포지션</div>
+                    <div class=" border-gray-300">승률</div>
+                    <div class=" border-gray-300">게임</div>
                 </div>
                 {#each $positionWinRates as rate}
                     <div class="grid grid-cols-3 gap-2 py-2 border-gray-300 text-xs">
-                        <div class="border-r border-gray-300">{rate.position}</div>
-                        <div class="border-r border-gray-300">{rate.winRate}</div>
+                        <div class=" border-gray-300">{rate.position}</div>
+                        <div class=" border-gray-300">{rate.winRate}</div>
                         <div>{rate.played}</div>
                     </div>
                 {/each}
             </div>
 
             <!-- Most Played Champions -->
-            <div class="bg-white p-4 rounded-lg shadow-md text-center">
+            <div class="bg-white p-4 rounded-lg shadow-md text-center w-full">
                 <h2 class="text-center font-bold mb-4 bg-gray-300 py-2 rounded text-lg">챔피언</h2>
                 <div class="grid grid-cols-4 gap-2 font-bold border-gray-300 text-xs">
-                    <div class="border-r border-gray-300">챔피언</div>
-                    <div class="border-r border-gray-300">KDA</div>
-                    <div class="border-r border-gray-300">포지션</div>
-                    <div class="border-r border-gray-300">승률</div>
+                    <div class=" border-gray-300">챔피언</div>
+                    <div class=" border-gray-300">KDA</div>
+                    <div class=" border-gray-300">포지션</div>
+                    <div class=" border-gray-300">승률</div>
                 </div>
                 {#each $mostPlayedChampions as champion}
                     <div class="grid grid-cols-4 gap-2 py-2 border-gray-300 text-xs">
-                        <div class="border-r border-gray-300 text-ellipsis overflow-hidden whitespace-nowrap">{champion.champion}</div>
-                        <div class="border-r border-gray-300">{champion.kda}</div>
-                        <div class="border-r border-gray-300">{champion.position}</div>
-                        <div class="border-r border-gray-300">{champion.winRate}</div>
+                        <div class=" border-gray-300 text-ellipsis overflow-hidden whitespace-nowrap">{champion.champion}</div>
+                        <div class=" border-gray-300">{champion.kda}</div>
+                        <div class=" border-gray-300">{champion.position}</div>
+                        <div class=" border-gray-300">{champion.winRate}</div>
                     </div>
                 {/each}
             </div>
 
             <!-- High Win Rate Players -->
-            <div class="bg-white p-4 rounded-lg shadow-md text-center">
+            <div class="bg-white p-4 rounded-lg shadow-md text-center w-full">
                 <h2 class="text-center font-bold mb-4 bg-gray-300 py-2 rounded text-lg">친구</h2>
                 <div class="grid grid-cols-3 gap-2 font-bold border-gray-300 text-xs">
-                    <div class="border-r border-gray-300">닉네임</div>
-                    <div class="border-r border-gray-300">승률</div>
-                    <div class="border-r border-gray-300">게임</div>
+                    <div class=" border-gray-300">닉네임</div>
+                    <div class=" border-gray-300">승률</div>
+                    <div class=" border-gray-300">게임</div>
                 </div>
                 {#each $highWinRatePlayers as player}
                     <div class="grid grid-cols-3 gap-2 py-2 border-gray-300 text-xs">
-                        <div class="border-r border-gray-300">{player.player}</div>
-                        <div class="border-r border-gray-300">{player.winRate}</div>
-                        <div class="border-r border-gray-300">{player.played}</div>
+                        <div class=" border-gray-300">{player.player}</div>
+                        <div class=" border-gray-300">{player.winRate}</div>
+                        <div class=" border-gray-300">{player.played}</div>
                     </div>
                 {/each}
             </div>
@@ -199,7 +199,7 @@
                         <p class="font-bold">{record.champion}</p>
                         <p>{record.kills} / {record.deaths} / {record.assists}</p>
                     </div>
-                    <div class="flex border-r border-gray-300 pr-2 justify-center mb-2 md:mb-0">
+                    <div class="flex  border-gray-300 pr-2 justify-center mb-2 md:mb-0">
                         <p>{record.position}</p>
                     </div>
                     <div class="text-right">
