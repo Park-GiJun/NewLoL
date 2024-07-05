@@ -12,29 +12,17 @@ export async function GET({ url }) {
     const nickName = url.searchParams.get('nickname');
     try {
         const data = await prisma.$queryRaw`
-            WITH PlayerMatches AS (
-                SELECT
-                    match_code,
-                    nickname,
-                    team_color,
-                    SUM(winning) AS wins,
-                    COUNT(*) AS total_matches
-                FROM
-                    game_data
-                GROUP BY
-                    match_code, nickname, team_color
+            WITH MatchCodes AS (
+                SELECT DISTINCT match_code, team_color
+                FROM game_data
+                WHERE nickname = ${nickName}
             ),
-                 MatchCodes AS (
-                     SELECT DISTINCT match_code, team_color
-                     FROM game_data
-                     WHERE nickname = ${nickName}
-                 ),
                  TeammateWinRates AS (
                      SELECT
                          gm.nickname,
                          SUM(gm.winning) AS wins,
-                         COUNT(*) AS total_matches,
-                         (SUM(gm.winning) * 1.0 / COUNT(*)) AS win_rate
+                         COUNT(DISTINCT gm.match_code) AS total_matches,  -- 같은 팀일 경우에만 카운트
+                         (SUM(gm.winning) * 1.0 / COUNT(DISTINCT gm.match_code)) AS win_rate
                      FROM
                          game_data gm
                              JOIN
@@ -51,8 +39,9 @@ export async function GET({ url }) {
             FROM
                 TeammateWinRates
             ORDER BY
-                winRate DESC
-            LIMIT 5;
+                winRate DESC,
+                total_matches desc
+                LIMIT 5;
         `;
 
         const transformedData = JSON.parse(JSON.stringify(data, replacer));
