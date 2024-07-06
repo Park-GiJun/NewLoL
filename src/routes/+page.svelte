@@ -1,37 +1,54 @@
 <script>
-    import Card from './MainComponent/Card.svelte';
+    import { onMount } from 'svelte';
+    import AnnouncementModal from "./SubComponent/AnnouncementModal.svelte";
+    import Card from "./MainComponent/Card.svelte";
     import MatchInfo from "./MainComponent/MatchInfo.svelte";
     import LeaderBoard from "./MainComponent/LeaderBoard.svelte";
-    import { onMount } from "svelte";
-    import { writable, get } from 'svelte/store';
+    import { writable } from 'svelte/store';
 
     let cards = [];
     let recentMatch = writable([]);
     let leaderBoardData = writable([]);
-    let ipAddress = writable('');
     let isLoading = writable(true);
 
     let showCards = writable(true);
     let showMatchInfo = writable(true);
 
-    onMount(async () => {
-        try {
-            const [cardsRes, matchRes, leaderBoardRes] = await Promise.all([
-                fetch('./api/select/Card'),
-                fetch('./api/select/MatchInfo'),
-                fetch('./api/select/LeaderBoard')
-            ]);
+    let announcement = null;
+    let showModal = writable(false);
 
-            const cardsData = await cardsRes.json();
-            recentMatch.set(await matchRes.json());
-            leaderBoardData.set(await leaderBoardRes.json());
+    onMount(async () => {
+        const doNotShowUntil = localStorage.getItem('doNotShowAnnouncement');
+        const now = new Date();
+
+        const dataPromises = [
+            fetch('./api/select/Card').then(res => res.json()),
+            fetch('./api/select/MatchInfo').then(res => res.json()),
+            fetch('./api/select/LeaderBoard').then(res => res.json())
+        ];
+
+        if (!doNotShowUntil || new Date(doNotShowUntil) <= now) {
+            dataPromises.push(fetch('./api/select/Announcement').then(res => res.json()));
+        }
+
+        try {
+            const [cardsData, matchData, leaderBoardDataRes, announcementData = []] = await Promise.all(dataPromises);
+
+            recentMatch.set(matchData);
+            leaderBoardData.set(leaderBoardDataRes);
+
+            if (announcementData.length > 0) {
+                announcement = announcementData[0];
+                showModal.set(true);
+            }
+
             cards = [
-                {header: 'Game', value: cardsData[0]["totalGamesPlayed"]},
-                {header: 'Days', value: cardsData[0]["totalDaysPlayed"]},
-                {header: 'Champion', value: cardsData[0]["mostPlayedChampion"]},
-                {header: 'Kill', value: cardsData[0]["mostKillsChampion"]},
-                {header: 'Death', value: cardsData[0]["mostDeathsChampion"]},
-                {header: 'KDA', value: cardsData[0]["bestKDAChampion"]}
+                { header: 'Game', value: cardsData[0]["totalGamesPlayed"] },
+                { header: 'Days', value: cardsData[0]["totalDaysPlayed"] },
+                { header: 'Champion', value: cardsData[0]["mostPlayedChampion"] },
+                { header: 'Kill', value: cardsData[0]["mostKillsChampion"] },
+                { header: 'Death', value: cardsData[0]["mostDeathsChampion"] },
+                { header: 'KDA', value: cardsData[0]["bestKDAChampion"] }
             ];
 
             isLoading.set(false);
@@ -47,9 +64,17 @@
     function toggleShowMatchInfo() {
         showMatchInfo.update(value => !value);
     }
+
+    function closeModal() {
+        showModal.set(false);
+    }
 </script>
 
 <div class="p-4 dark:bg-gray-900 text-center">
+    {#if $showModal && announcement}
+        <AnnouncementModal {announcement} onClose={closeModal} />
+    {/if}
+
     <div class="mb-4">
         <button class="px-4 py-2 bg-gray-500 text-white rounded-lg shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 text-xs lg:hidden"
                 on:click={toggleShowCards}>

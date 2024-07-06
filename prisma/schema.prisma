@@ -62,3 +62,20 @@ model ip {
   ip   String?   @db.VarChar(255)
   date DateTime? @db.DateTime(0)
 }
+
+model users {
+  id         Int       @id @default(autoincrement())
+  username   String    @unique(map: "username") @db.VarChar(255)
+  password   String    @db.VarChar(255)
+  email      String    @unique(map: "email") @db.VarChar(255)
+  created_at DateTime? @default(now()) @db.Timestamp(0)
+  updated_at DateTime? @default(now()) @db.Timestamp(0)
+}
+
+model announcements {
+  id          Int       @id @default(autoincrement())
+  title       String    @db.VarChar(255)
+  content     String    @db.Text
+  createDate  DateTime? @default(now()) @db.Timestamp(0)
+  expiredDate DateTime? @db.Timestamp(0)
+}
