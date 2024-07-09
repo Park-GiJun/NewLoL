@@ -15,7 +15,7 @@
     });
 </script>
 
-<main class="p-8">
+<main>
     {#if isLoading}
         <p>Loading...</p>
     {:else}

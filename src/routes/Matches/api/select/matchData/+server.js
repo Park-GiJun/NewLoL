@@ -8,8 +8,8 @@ export async function GET({ url }) {
     const results = await prisma.$queryRaw`
         SELECT *
         FROM game_data
-        WHERE date LIKE ${'%' + formattedDate + '%'}
-        ORDER BY date
+        WHERE game_data.date LIKE ${'%' + formattedDate + '%'}
+        ORDER BY game_data.date desc;
     `;
 
     const serializedResults = JSON.parse(JSON.stringify(results, (key, value) =>

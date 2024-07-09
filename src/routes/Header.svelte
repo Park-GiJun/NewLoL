@@ -8,10 +8,9 @@
         isOpen = !isOpen;
         dispatch('toggle', { isOpen });
     }
-
 </script>
 
-<header class={`bg-gray-800 dark:bg-gray-900 text-white p-4 flex flex-col h-screen transition-all duration-300 ease-in-out ${isOpen ? 'w-64' : 'w-16'}`}>
+<header class={`bg-gray-800 dark:bg-gray-900 text-white p-4 flex flex-col h-[100vh] transition-all duration-300 ease-in-out ${isOpen ? 'w-64' : 'w-16'}`}>
     <div class="flex justify-between items-center mb-4">
         <div class={`text-2xl font-bold transition-opacity duration-300 ease-in-out ${isOpen ? 'opacity-100' : 'opacity-0'} ${!isOpen ? 'hidden' : 'block'}`}>
             OLM
