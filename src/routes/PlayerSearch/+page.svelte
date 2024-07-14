@@ -134,7 +134,7 @@
     {#if $isLoading}
         <p class="text-center mt-4 text-lg">Loading...</p>
     {:else}
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-full p-4 max-w-screen-2xl overflow-y-auto md:overflow-hidden">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4  w-full p-4 max-w-screen-2xl overflow-y-auto md:overflow-hidden md:min-h-[30vh]">
             <!-- Position Win Rates -->
             <div class="bg-white p-4 rounded-lg shadow-md text-center w-full">
                 <h2 class="text-center font-bold mb-4 bg-gray-300 py-2 rounded text-lg">포지션</h2>
@@ -155,15 +155,17 @@
             <!-- Most Played Champions -->
             <div class="bg-white p-4 rounded-lg shadow-md text-center w-full">
                 <h2 class="text-center font-bold mb-4 bg-gray-300 py-2 rounded text-lg">챔피언</h2>
-                <div class="grid grid-cols-4 gap-2 font-bold border-gray-300 text-xs">
+                <div class="grid grid-cols-5 gap-2 font-bold border-gray-300 text-xs">
                     <div class=" border-gray-300">챔피언</div>
+                    <div class=" border-gray-300">플레이</div>
                     <div class=" border-gray-300">KDA</div>
                     <div class=" border-gray-300">포지션</div>
                     <div class=" border-gray-300">승률</div>
                 </div>
                 {#each $mostPlayedChampions as champion}
-                    <div class="grid grid-cols-4 gap-2 py-2 border-gray-300 text-xs">
+                    <div class="grid grid-cols-5 gap-2 py-2 border-gray-300 text-xs">
                         <div class=" border-gray-300 text-ellipsis overflow-hidden whitespace-nowrap">{champion.champion}</div>
+                        <div class=" border-gray-300">{champion.totalGames}</div>
                         <div class=" border-gray-300">{champion.kda}</div>
                         <div class=" border-gray-300">{champion.position}</div>
                         <div class=" border-gray-300">{champion.winRate}</div>

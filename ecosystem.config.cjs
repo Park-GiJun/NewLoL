@@ -12,6 +12,10 @@ module.exports = {
             max_memory_restart: "512M",
             env: {
                 PORT: 9090,
-            }
+            },
+            output: './logs/out.log',
+            error: './logs/error.log',
+            log: './logs/combined.log',
+            time: true
         }]
 };

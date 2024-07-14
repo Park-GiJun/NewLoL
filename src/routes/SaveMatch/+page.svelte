@@ -107,7 +107,6 @@
 
         console.log('Unique match code:', matchCode);
 
-        // Add winning status to each player
         const blueTeam = game.blueTeam.map(player => ({
             ...player,
             winning: game.winningTeam === 'blue' ? 1 : 0
@@ -116,6 +115,11 @@
             ...player,
             winning: game.winningTeam === 'red' ? 1 : 0
         }));
+
+        const bans = [
+            ...game.blueBans.map(ban => ({ banChampion: ban, banTeamColor: 'blue' })),
+            ...game.redBans.map(ban => ({ banChampion: ban, banTeamColor: 'red' }))
+        ];
 
         const saveGameResponse = await fetch('../SaveMatch/api/insert/SaveMatch', {
             method: 'POST',
@@ -132,6 +136,20 @@
 
         const saveGameResult = await saveGameResponse.json();
         console.log('Save game response:', saveGameResult);
+
+        const saveBansResponse = await fetch('../SaveMatch/api/insert/Ban', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                matchCode: matchCode,
+                bans: bans
+            })
+        });
+
+        const saveBansResult = await saveBansResponse.json();
+        console.log('Save bans response:', saveBansResult);
     }
 
     async function fetchSuggestions(type, team, index, gameIndex, isBan = false) {

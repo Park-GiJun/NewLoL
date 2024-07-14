@@ -1,9 +1,14 @@
 import { json } from '@sveltejs/kit';
 import prisma from '$lib/prisma.js';
+import {addHours} from "date-fns";
 
 export async function POST({ request }) {
     const { matchCode, blueTeam, redTeam, winning } = await request.json();
     let winning_fg;
+
+    const now = new Date();
+
+    const koreaNow = addHours(now, 9);
 
     try {
         const gameData = [];
@@ -22,7 +27,7 @@ export async function POST({ request }) {
             gameData.push({
                 assists: parseInt(player.assists, 10),
                 champion: player.champion,
-                date: new Date(),
+                date: koreaNow,
                 deaths: parseInt(player.deaths, 10),
                 kills: parseInt(player.kills, 10),
                 match_code: matchCode,

@@ -25,7 +25,8 @@ export async function GET({ url }) {
             SELECT champion,
                    position,
                    CONCAT(ROUND(winRate, 2), '%') AS winRate,
-                   ROUND(kda, 1)                  AS kda
+                   ROUND(kda, 1)                  AS kda,
+            totalGames
             FROM ChampionStats
             ORDER BY winRate DESC
             LIMIT 5;
