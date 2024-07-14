@@ -3,7 +3,7 @@
     import { selectedDate, availableDates, setDate, matchData, setMatchData } from '$lib/store/calender.js';
     import { get } from 'svelte/store';
     import MatchDetails from './MatchDetails.svelte';
-    import {findLastIndex} from "lodash";
+    import { findLastIndex } from "lodash";
 
     let currentYear;
     let currentMonth;
@@ -37,7 +37,7 @@
 
     function groupByMatchCode(data) {
         return data.reduce((acc, curr) => {
-            const { match_code } = curr;
+            const {match_code} = curr;
             if (!acc[match_code]) {
                 acc[match_code] = [];
             }
@@ -108,60 +108,69 @@
     const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 </script>
 
-<div class="p-2 bg-gray-200 dark:bg-gray-800 rounded-lg shadow-md">
+<div class="p-2 bg-gray-200 dark:bg-gray-800 rounded-lg shadow-md overflow-y-auto max-h-[95vh] relative">
     <div class="flex justify-between items-center mb-2">
-        <button class="px-2 py-1 bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none text-sm" on:click={toggleCalendar}>
+        <button class="px-2 py-1 bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none text-sm"
+                on:click={toggleCalendar}>
             {isCalendarVisible ? 'Hide Calendar' : 'Show Calendar'}
         </button>
     </div>
 
     {#if isCalendarVisible}
-        <div>
-            <div class="flex justify-between items-center mb-2">
-                <button class="px-2 py-1 bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none text-sm" on:click={previousMonth}>
-                    &lt;
-                </button>
-                <span class="text-md font-bold text-gray-900 dark:text-gray-100">
-                    {getMonthName(currentMonth)} {currentYear}
-                </span>
-                <button class="px-2 py-1 bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none text-sm" on:click={nextMonth}>
-                    &gt;
-                </button>
-            </div>
+        <div class="fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-75 flex items-center justify-center z-50">
+            <div class="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-4 max-w-xl mx-auto relative transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                <div class="flex justify-between items-center mb-2">
+                    <button class="px-2 py-1 bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none text-sm"
+                            on:click={previousMonth}>
+                        &lt;
+                    </button>
+                    <span class="text-md font-bold text-gray-900 dark:text-gray-100">
+                        {getMonthName(currentMonth)} {currentYear}
+                    </span>
+                    <button class="px-2 py-1 bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none text-sm"
+                            on:click={nextMonth}>
+                        &gt;
+                    </button>
+                </div>
 
-            <div class="grid grid-cols-7 gap-1 mb-2 text-sm">
-                {#each weekDays as day}
-                    <div class="text-center font-bold">{day}</div>
-                {/each}
-            </div>
-
-            <div class="grid grid-cols-7 gap-1 text-xs">
-                {#each generateCalendar(currentYear, currentMonth) as week}
-                    {#each week as date}
-                        {#if date}
-                            <button
-                                    class={`p-1 border rounded-lg text-center focus:outline-none
-                                ${date === $selectedDate ? 'bg-gray-500 text-white' : 'bg-gray-300 text-gray-900 dark:bg-gray-700 dark:text-gray-200'}
-                                ${dates.includes(date) ? 'hover:bg-gray-400 dark:hover:bg-gray-600' : 'opacity-50 cursor-not-allowed'}`}
-                                    on:click={() => { setDate(date); fetchMatches(); }}
-                                    disabled={!dates.includes(date)}
-                            >
-                                {new Date(date).getDate()}
-                            </button>
-                        {:else}
-                            <button class="p-1 border rounded-lg bg-transparent cursor-not-allowed" disabled></button>
-                        {/if}
+                <div class="grid grid-cols-7 gap-1 mb-2 text-sm">
+                    {#each weekDays as day}
+                        <div class="text-center font-bold">{day}</div>
                     {/each}
-                {/each}
+                </div>
+
+                <div class="grid grid-cols-7 gap-1 text-xs">
+                    {#each generateCalendar(currentYear, currentMonth) as week}
+                        {#each week as date}
+                            {#if date}
+                                <button
+                                        class={`p-1 border rounded-lg text-center focus:outline-none
+                                    ${date === $selectedDate ? 'bg-gray-500 text-white' : 'bg-gray-300 text-gray-900 dark:bg-gray-700 dark:text-gray-200'}
+                                    ${dates.includes(date) ? 'hover:bg-gray-400 dark:hover:bg-gray-600' : 'opacity-50 cursor-not-allowed'}`}
+                                        on:click={() => { setDate(date); fetchMatches(); }}
+                                        disabled={!dates.includes(date)}
+                                >
+                                    {new Date(date).getDate()}
+                                </button>
+                            {:else}
+                                <button class="p-1 border rounded-lg bg-transparent cursor-not-allowed"
+                                        disabled></button>
+                            {/if}
+                        {/each}
+                    {/each}
+                </div>
+                <button class="mt-2 p-1 border rounded-lg focus:outline-none hover:bg-gray-400 dark:hover:bg-gray-600 bg-gray-500 text-white mx-auto"
+                        on:click={() => isCalendarVisible = false}>닫기
+                </button>
             </div>
         </div>
     {/if}
 
-    <div class="bg-white dark:bg-gray-700 p-2 rounded-lg shadow-md overflow-y-auto mt-3" style="max-height: {isCalendarVisible ? 'h-[30vh]' : 'h-[50vh]'};">
+    <div class="bg-white dark:bg-gray-700 p-2 rounded-lg shadow-md mt-3 overflow-y-auto max-h-screen">
         {#if Object.keys(groupedMatches).length > 0}
             {#each Object.keys(groupedMatches) as match_code}
                 <div class="mb-2">
-                    <MatchDetails match={groupedMatches[match_code]} />
+                    <MatchDetails match={groupedMatches[match_code]}/>
                 </div>
             {/each}
         {:else}
